@@ -1,5 +1,7 @@
 # LangGraph Starter — Deploy on Railway
 
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/langgraph-starter)
+
 A production-wired LangGraph starter: **FastAPI** + **LangGraph 1.2**
 with a **Postgres 18 checkpointer** + **pgvector** retrieval, a
 **human-in-the-loop** review step, and optional LangSmith tracing.
