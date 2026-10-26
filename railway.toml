@@ -1,0 +1,25 @@
+# Railway Config as Code — app service.
+# https://docs.railway.com/cli/templates
+#
+# Template wiring (done in the Railway dashboard / Template Composer,
+# not in this file — there is no template.json format):
+#   - Add a Postgres service; reference it as DATABASE_URL=
+#     ${{Postgres.DATABASE_URL}} on this service (private network).
+#   - Pre-deploy command runs the migration script before each deploy,
+#     so a failed migration stops the deploy before the app starts.
+#   - Healthcheck must return HTTP 200 directly (no redirect).
+
+[build]
+builder = "RAILPACK"
+buildCommand = "pip install -r requirements.txt"
+
+[deploy]
+startCommand = "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+healthcheckPath = "/api/health"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3
+preDeployCommand = "python scripts/migrate.py"
+
+# No PORT setting needed: Railway injects $PORT at runtime and the
+# startCommand binds it explicitly.
