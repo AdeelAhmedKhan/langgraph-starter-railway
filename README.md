@@ -9,6 +9,23 @@ One-click deploy on Railway; nothing in here is a demo stub — the graph
 runs against a real database, persistence survives restarts, and
 anything not configured tells you so instead of crashing.
 
+## Demo — what it looks like
+
+Screenshots from a local run of this exact code (Postgres 18, 5 seeded
+documents, no OpenAI key — so the drafts are verbatim extracts and
+retrieval is full-text search, labelled as such; nothing here is LLM
+output). This starter is an API, not a web UI, so the demo is the
+landing page, the Swagger docs, and the live API responses.
+
+![Landing page](docs/screenshots/01-landing.png)
+![API docs (Swagger UI) — all 7 endpoints, including POST /api/runs and POST /api/runs/{thread_id}/resume](docs/screenshots/02-docs.png)
+![Health — db ok, llm/embeddings/langsmith not_configured (no keys set)](docs/screenshots/03-health.png)
+![Graph info — nodes retrieve/draft/review/publish, PostgresSaver checkpointer, human-in-the-loop review step](docs/screenshots/04-graph-info.png)
+![A run paused for approval — status started, next review, verbatim-extract draft, llm_used false](docs/screenshots/05-run-paused.png)
+![The same run after approve — status published, approved true, final answer saved](docs/screenshots/06-run-approved.png)
+![Published notes — exactly one note: the approved run (the rejected run was never saved)](docs/screenshots/07-notes.png)
+![A rejected run — status rejected, final answer null, not saved as a note](docs/screenshots/08-run-rejected.png)
+
 ## Stack & versions (pinned, verified 2026-10-26)
 
 | Piece | Version | Notes |
